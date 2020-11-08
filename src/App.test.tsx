@@ -1,9 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders title and subtitle", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { level: 1 }).textContent
+  ).toMatchInlineSnapshot(`"Annex"`);
+  expect(
+    screen.getByRole("heading", { level: 2 }).textContent
+  ).toMatchInlineSnapshot(`"Append Only Micro Blogs"`);
 });
