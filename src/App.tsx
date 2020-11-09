@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useFirebase } from "./components/firebase";
+import { useAuth } from "./components/auth";
 import "./App.css";
 
-const App = () => {
-  const firebase = useFirebase();
+export const App = () => {
+  const auth = useAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!firebase) {
+    if (!auth) {
       return;
     }
 
-    return firebase.onAuthStateChanged(() => {
+    return auth.onAuthStateChanged(() => {
       setLoading(false);
     });
-  }, [firebase]);
+  }, [auth]);
 
   return (
     <div className="container">
@@ -26,5 +26,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;

@@ -1,10 +1,9 @@
 import app from "firebase/app";
 import "firebase/auth";
-import config from "./config";
+import { config } from "./firebase-config";
+import { Auth, Credentials } from "./Auth";
 
-type Credentials = { email: string; password: string };
-
-class Firebase {
+export class FirebaseAuth implements Auth {
   private auth: app.auth.Auth;
   private authenticated: boolean = false;
 
@@ -47,5 +46,3 @@ class Firebase {
 
   isAuthenticated = (): boolean => this.authenticated;
 }
-
-export default Firebase;
