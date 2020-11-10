@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./reset.css";
-import "./index.css";
-import { App } from "./App";
-import { reportWebVitals } from "./reportWebVitals";
+import { App } from "./components/app";
 import { AuthContext } from "./components/auth";
 import { FirebaseAuth } from "./services/FirebaseAuth";
+import "./index.css";
+import { reportWebVitals } from "./reportWebVitals";
+import "./reset.css";
 
 ReactDOM.render(
   <React.StrictMode>

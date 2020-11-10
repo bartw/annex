@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "./components/auth";
-import "./App.css";
+import { useAuth } from "../auth";
+import "./app.css";
 
 export const App = () => {
   const auth = useAuth();
