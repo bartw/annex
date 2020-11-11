@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { App } from "./components/app";
 import { AuthContext } from "./components/auth";
 import { FirebaseAuth } from "./services/FirebaseAuth";
@@ -9,9 +10,11 @@ import "./reset.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContext.Provider value={new FirebaseAuth()}>
-      <App />
-    </AuthContext.Provider>
+    <Router>
+      <AuthContext.Provider value={new FirebaseAuth()}>
+        <App />
+      </AuthContext.Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
