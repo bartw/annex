@@ -12,25 +12,12 @@ type Callback = (authenticated: boolean) => void;
 export class MockAuth implements Auth {
   private callbacks: Array<{ id: string; callback: Callback }> = [];
 
-  signUp(credentials: Credentials): Promise<void> {
-    return Promise.resolve();
-  }
-
-  signIn(credentials: Credentials): Promise<void> {
-    return Promise.resolve();
-  }
-
-  signOut(): Promise<void> {
-    return Promise.resolve();
-  }
-
-  resetPassword({ email }: { email: string }): Promise<void> {
-    return Promise.resolve();
-  }
-
-  updatePassword({ password }: { password: string }): Promise<void> {
-    return Promise.resolve();
-  }
+  signUp = jest.fn().mockReturnValue(Promise.resolve());
+  signIn = jest.fn().mockReturnValue(Promise.resolve());
+  signOut = jest.fn().mockReturnValue(Promise.resolve());
+  resetPassword = jest.fn().mockReturnValue(Promise.resolve());
+  updatePassword = jest.fn().mockReturnValue(Promise.resolve());
+  isAuthenticated = jest.fn().mockReturnValue(false);
 
   onAuthStateChanged(callback: Callback): () => void {
     const id = uuid();
@@ -44,9 +31,5 @@ export class MockAuth implements Auth {
     this.callbacks.forEach(({ callback }) => {
       callback(authenticated);
     });
-  }
-
-  isAuthenticated(): boolean {
-    return false;
   }
 }
