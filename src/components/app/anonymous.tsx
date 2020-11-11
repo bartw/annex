@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
+import { SignUp } from "../sign-up";
 
 export const Anonymous = () => (
   <div>
@@ -18,7 +19,9 @@ export const Anonymous = () => (
     </nav>
 
     <Switch>
-      <Route path="/sign-up">Sign Up</Route>
+      <Route path="/sign-up">
+        <SignUp />
+      </Route>
       <Route path="/sign-in">Sign In</Route>
       <Route path="/">Home</Route>
     </Switch>
