@@ -7,66 +7,15 @@ import {
 } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "../auth";
-import { Auth, Credentials } from "../../services/Auth";
+import { MockAuth } from "../../test/MockAuth";
 import { App } from ".";
-
-const uuid = () =>
-  "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c === "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-
-type Callback = (authenticated: boolean) => void;
-
-class AuthMock implements Auth {
-  private callbacks: Array<{ id: string; callback: Callback }> = [];
-
-  signUp(credentials: Credentials): Promise<void> {
-    return Promise.resolve();
-  }
-
-  signIn(credentials: Credentials): Promise<void> {
-    return Promise.resolve();
-  }
-
-  signOut(): Promise<void> {
-    return Promise.resolve();
-  }
-
-  resetPassword({ email }: { email: string }): Promise<void> {
-    return Promise.resolve();
-  }
-
-  updatePassword({ password }: { password: string }): Promise<void> {
-    return Promise.resolve();
-  }
-
-  onAuthStateChanged(callback: Callback): () => void {
-    const id = uuid();
-    this.callbacks = [...this.callbacks, { id, callback }];
-    return () => {
-      this.callbacks = this.callbacks.filter((cb) => id !== cb.id);
-    };
-  }
-
-  fireCallbacks(authenticated: boolean): void {
-    this.callbacks.forEach(({ callback }) => {
-      callback(authenticated);
-    });
-  }
-
-  isAuthenticated(): boolean {
-    return false;
-  }
-}
 
 const render = (
   ui: React.ReactElement,
   {
     auth = null,
     ...options
-  }: { auth?: AuthMock | null } & Omit<RenderOptions, "queries"> = {}
+  }: { auth?: MockAuth | null } & Omit<RenderOptions, "queries"> = {}
 ) => {
   const Wrapper: React.ComponentType = ({ children }) => (
     <MemoryRouter>
@@ -77,9 +26,9 @@ const render = (
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 };
 
-let authMock: AuthMock;
+let authMock: MockAuth;
 beforeEach(() => {
-  authMock = new AuthMock();
+  authMock = new MockAuth();
   render(<App />, { auth: authMock });
 });
 
