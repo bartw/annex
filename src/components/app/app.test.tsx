@@ -9,6 +9,7 @@ import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "../auth";
 import { MockAuth } from "../../test/MockAuth";
 import { App } from ".";
+import userEvent from "@testing-library/user-event";
 
 const render = (
   ui: React.ReactElement,
@@ -26,48 +27,77 @@ const render = (
   return rtlRender(ui, { wrapper: Wrapper, ...options });
 };
 
-let authMock: MockAuth;
-beforeEach(() => {
-  authMock = new MockAuth();
-  render(<App />, { auth: authMock });
+describe("without auth", () => {
+  test("shows a loading state when auth is not available", () => {
+    render(<App />, { auth: null });
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  });
 });
 
-test("renders title and subtitle", () => {
-  expect(
-    screen.getByRole("heading", { level: 1 }).textContent
-  ).toMatchInlineSnapshot(`"Annex"`);
+describe("with auth", () => {
+  let authMock: MockAuth;
+  beforeEach(() => {
+    authMock = new MockAuth();
+    render(<App />, { auth: authMock });
+  });
 
-  expect(
-    screen.getByRole("heading", { level: 2 }).textContent
-  ).toMatchInlineSnapshot(`"Append Only Micro Blogs"`);
-});
+  test("renders title and subtitle", () => {
+    expect(
+      screen.getByRole("heading", { level: 1 }).textContent
+    ).toMatchInlineSnapshot(`"Annex"`);
 
-test("shows a loading state until the auth service is ready", () => {
-  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2 }).textContent
+    ).toMatchInlineSnapshot(`"Append Only Micro Blogs"`);
+  });
 
-  act(() => authMock.fireCallbacks(false));
+  test("shows a loading state until the auth service is ready", () => {
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
-  expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
-});
+    act(() => authMock.fireCallbacks(false));
 
-test("shows the correct menu items when not authenticated", async () => {
-  act(() => authMock.fireCallbacks(false));
+    expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+  });
 
-  const menuItems = screen
-    .queryAllByRole("listitem")
-    .map(({ textContent }) => textContent);
+  test("shows the correct menu items when not authenticated", async () => {
+    act(() => authMock.fireCallbacks(false));
 
-  expect(menuItems).toHaveLength(3);
-  expect(menuItems).toEqual(["Home", "Sign Up", "Sign In"]);
-});
+    const menuItems = screen
+      .queryAllByRole("link")
+      .map((element) => (element as HTMLLinkElement).href);
 
-test("shows the correct menu items when authenticated", async () => {
-  act(() => authMock.fireCallbacks(true));
+    expect(menuItems).toHaveLength(3);
+    expect(menuItems).toEqual([
+      "http://localhost/",
+      "http://localhost/sign-up",
+      "http://localhost/sign-in",
+    ]);
+  });
 
-  const menuItems = screen
-    .queryAllByRole("listitem")
-    .map(({ textContent }) => textContent);
+  test("shows the correct menu items when authenticated", async () => {
+    act(() => authMock.fireCallbacks(true));
 
-  expect(menuItems).toHaveLength(2);
-  expect(menuItems).toEqual(["Home", "Sign Out"]);
+    const menuItems = screen
+      .queryAllByRole("link")
+      .map((element) => (element as HTMLLinkElement).href);
+
+    expect(menuItems).toHaveLength(1);
+    expect(menuItems).toEqual(["http://localhost/"]);
+  });
+
+  test("shows a sign out button when authenticated", async () => {
+    act(() => authMock.fireCallbacks(true));
+
+    expect(
+      screen.getByRole("button", { name: /sign out/i })
+    ).toBeInTheDocument();
+  });
+
+  test("on click sign out button calls signOut", async () => {
+    act(() => authMock.fireCallbacks(true));
+
+    userEvent.click(screen.getByRole("button", { name: /sign out/i }));
+
+    expect(authMock.signOut).toHaveBeenCalledTimes(1);
+  });
 });

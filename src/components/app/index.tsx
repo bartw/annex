@@ -27,11 +27,11 @@ export const App = () => {
         <h2>Append Only Micro Blogs</h2>
       </header>
       <main>
-        {loading && <span>Loading...</span>}
-        {!loading && (
+        {(!auth || loading) && <span>Loading...</span>}
+        {auth && !loading && (
           <>
             {!isAuthenticated && <Anonymous />}
-            {isAuthenticated && <Authenticated />}
+            {isAuthenticated && <Authenticated onSignOut={auth.signOut} />}
           </>
         )}
       </main>

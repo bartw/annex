@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import { SignUp } from "../sign-up";
+import { SignIn } from "../sign-in";
 
 export const Anonymous = () => (
   <div>
@@ -22,7 +23,9 @@ export const Anonymous = () => (
       <Route path="/sign-up">
         <SignUp />
       </Route>
-      <Route path="/sign-in">Sign In</Route>
+      <Route path="/sign-in">
+        <SignIn />
+      </Route>
       <Route path="/">Home</Route>
     </Switch>
   </div>

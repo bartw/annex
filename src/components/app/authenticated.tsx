@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
-export const Authenticated = () => (
+export const Authenticated = ({ onSignOut }: { onSignOut: () => void }) => (
   <div>
     <nav>
       <ul>
@@ -9,13 +9,14 @@ export const Authenticated = () => (
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/sign-out">Sign Out</Link>
+          <button type="button" onClick={onSignOut}>
+            Sign Out
+          </button>
         </li>
       </ul>
     </nav>
 
     <Switch>
-      <Route path="/sign-out">Sign Out</Route>
       <Route path="/">Welcome!</Route>
     </Switch>
   </div>
