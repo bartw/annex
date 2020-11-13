@@ -1,2 +1,2 @@
 export { AuthContext } from "./context";
-export { useAuth } from "./useAuth";
+export { useAuth } from "./use-auth";

@@ -1,6 +1,5 @@
 import app from "firebase/app";
 import "firebase/auth";
-import { config } from "./firebase-config";
 import { Auth, Credentials } from "./Auth";
 
 export class FirebaseAuth implements Auth {
@@ -8,8 +7,6 @@ export class FirebaseAuth implements Auth {
   private authenticated: boolean = false;
 
   constructor() {
-    app.initializeApp(config);
-
     this.auth = app.auth();
 
     this.onAuthStateChanged((authenticated) => {

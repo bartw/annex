@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { AuthContext } from "../auth";
-import { MockAuth } from "../../test/MockAuth";
+import { MockAuth } from "../../test/mock-auth";
 import { SignIn } from ".";
 
 const email = "my.e@ma.il";

@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "../auth";
-import { MockAuth } from "../../test/MockAuth";
+import { MockAuth } from "../../test/mock-auth";
 import { App } from ".";
 import userEvent from "@testing-library/user-event";
 
@@ -81,8 +81,11 @@ describe("with auth", () => {
       .queryAllByRole("link")
       .map((element) => (element as HTMLLinkElement).href);
 
-    expect(menuItems).toHaveLength(1);
-    expect(menuItems).toEqual(["http://localhost/"]);
+    expect(menuItems).toHaveLength(2);
+    expect(menuItems).toEqual([
+      "http://localhost/",
+      "http://localhost/add-stream",
+    ]);
   });
 
   test("shows a sign out button when authenticated", async () => {
