@@ -10,7 +10,7 @@ const uuid = () =>
 type Callback = (authenticated: boolean) => void;
 
 export class MockAuth implements Auth {
-  private callbacks: Array<{ id: string; callback: Callback }> = [];
+  private callbacks: { id: string; callback: Callback }[] = [];
 
   signUp = jest.fn().mockReturnValue(Promise.resolve());
   signIn = jest.fn().mockReturnValue(Promise.resolve());

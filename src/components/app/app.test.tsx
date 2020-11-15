@@ -8,8 +8,14 @@ import {
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from "../auth";
 import { MockAuth } from "../../test/mock-auth";
+import { MockStream } from "../../test/mock-stream";
 import { App } from ".";
 import userEvent from "@testing-library/user-event";
+
+jest.mock("../../services/FirebaseStream", () => ({
+  __esModule: true,
+  FirebaseStream: MockStream
+}));
 
 const render = (
   ui: React.ReactElement,

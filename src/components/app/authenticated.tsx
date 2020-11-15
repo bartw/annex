@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import { FirebaseStream } from "../../services/FirebaseStream";
 import { StreamContext } from "../stream";
+import { Dashboard } from "../dashboard";
 import { AddStream } from "../add-stream";
 
 export const Authenticated = ({
@@ -33,7 +34,9 @@ export const Authenticated = ({
         <Route path="/add-stream">
           <AddStream />
         </Route>
-        <Route path="/">Welcome!</Route>
+        <Route path="/">
+          <Dashboard />
+        </Route>
       </Switch>
     </div>
   </StreamContext.Provider>
