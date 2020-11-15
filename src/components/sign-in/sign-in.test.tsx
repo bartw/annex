@@ -31,7 +31,7 @@ let authMock: MockAuth;
 
 describe("without auth", () => {
   test("it renders nothing", () => {
-    const {container} = render(<SignIn />, { auth: null });
+    const { container } = render(<SignIn />, { auth: null });
     expect(container).toBeEmptyDOMElement();
   });
 });

@@ -1,6 +1,7 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { FirebaseStream } from "../../services/FirebaseStream";
+import { Button } from "../button";
 import { StreamContext } from "../stream";
 import { Dashboard } from "../dashboard";
 import { AddStream } from "../add-stream";
@@ -13,31 +14,35 @@ export const Authenticated = ({
   onSignOut: () => void;
 }) => (
   <StreamContext.Provider value={new FirebaseStream(userId)}>
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/add-stream">Add Stream</Link>
-          </li>
-          <li>
-            <button type="button" onClick={onSignOut}>
-              Sign Out
-            </button>
-          </li>
-        </ul>
-      </nav>
-
+    <nav>
+      <ul>
+        <li>
+          <NavLink to="/" exact>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/add-stream" exact>
+            Add Stream
+          </NavLink>
+        </li>
+        <li>
+          <Button onClick={onSignOut}>Sign Out</Button>
+        </li>
+      </ul>
+    </nav>
+    <main>
       <Switch>
-        <Route path="/add-stream">
+        <Route path="/add-stream" exact>
           <AddStream />
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <Dashboard />
         </Route>
+        <Route>
+          <Redirect to="/" />
+        </Route>
       </Switch>
-    </div>
+    </main>
   </StreamContext.Provider>
 );

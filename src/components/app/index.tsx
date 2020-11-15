@@ -26,17 +26,15 @@ export const App = () => {
         <h1>Annex</h1>
         <h2>Append Only Micro Blogs</h2>
       </header>
-      <main>
-        {(!auth || loading) && <span>Loading...</span>}
-        {auth && !loading && (
-          <>
-            {!userId && <Anonymous />}
-            {!!userId && (
-              <Authenticated userId={userId} onSignOut={auth.signOut} />
-            )}
-          </>
-        )}
-      </main>
+      {(!auth || loading) && <div>Loading...</div>}
+      {auth && !loading && (
+        <>
+          {!userId && <Anonymous />}
+          {!!userId && (
+            <Authenticated userId={userId} onSignOut={auth.signOut} />
+          )}
+        </>
+      )}
     </div>
   );
 };

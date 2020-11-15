@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import { SignUp } from "../sign-up";
 import { SignIn } from "../sign-in";
 
@@ -8,25 +8,37 @@ export const Anonymous = () => (
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink to="/" exact>
+            Home
+          </NavLink>
         </li>
         <li>
-          <Link to="/sign-up">Sign Up</Link>
+          <NavLink to="/sign-up" exact>
+            Sign Up
+          </NavLink>
         </li>
         <li>
-          <Link to="/sign-in">Sign In</Link>
+          <NavLink to="/sign-in" exact>
+            Sign In
+          </NavLink>
         </li>
       </ul>
     </nav>
-
-    <Switch>
-      <Route path="/sign-up">
-        <SignUp />
-      </Route>
-      <Route path="/sign-in">
-        <SignIn />
-      </Route>
-      <Route path="/">Home</Route>
-    </Switch>
+    <main>
+      <Switch>
+        <Route path="/sign-up" exact>
+          <SignUp />
+        </Route>
+        <Route path="/sign-in" exact>
+          <SignIn />
+        </Route>
+        <Route path="/" exact>
+          Home
+        </Route>
+        <Route>
+          <Redirect to="/" />
+        </Route>
+      </Switch>
+    </main>
   </div>
 );

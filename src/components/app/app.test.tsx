@@ -14,7 +14,7 @@ import userEvent from "@testing-library/user-event";
 
 jest.mock("../../services/FirebaseStream", () => ({
   __esModule: true,
-  FirebaseStream: MockStream
+  FirebaseStream: MockStream,
 }));
 
 const render = (
@@ -108,7 +108,7 @@ describe("with auth", () => {
 
   test("on click sign out button calls signOut", async () => {
     authMock.getUserId.mockReturnValue("userId");
-    
+
     act(() => authMock.fireCallbacks(true));
 
     userEvent.click(screen.getByRole("button", { name: /sign out/i }));

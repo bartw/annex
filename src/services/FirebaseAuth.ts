@@ -39,8 +39,8 @@ export class FirebaseAuth implements Auth {
   };
 
   isUserAuthenticated = (): boolean => !!this.user;
-  
+
   getUserId = (): string | null => this.user?.uid ?? null;
-  
+
   getUserName = (): string | null => this.user?.displayName ?? null;
 }

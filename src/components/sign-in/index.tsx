@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../auth";
+import { FormElement } from "../form-element";
+import { Button } from "../button";
 
 export const SignIn = () => {
   const auth = useAuth();
@@ -17,8 +19,7 @@ export const SignIn = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Email:
+      <FormElement label="Email:">
         <input
           type="email"
           required
@@ -27,9 +28,8 @@ export const SignIn = () => {
             setEmail(e.currentTarget.value)
           }
         />
-      </label>
-      <label>
-        Password:
+      </FormElement>
+      <FormElement label="Password:">
         <input
           type="password"
           required
@@ -38,8 +38,10 @@ export const SignIn = () => {
             setPassword(e.currentTarget.value)
           }
         />
-      </label>
-      <button type="submit">Sign In</button>
+      </FormElement>
+      <FormElement>
+        <Button type="submit">Sign In</Button>
+      </FormElement>
     </form>
   );
 };

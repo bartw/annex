@@ -8,9 +8,27 @@ header h1 {
 }
 
 header h2 {
-  margin-top: 8px
+  margin-top: 8px;
+}
+
+nav li {
+  margin-top: 16px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #666666;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+nav a.active {
+  color: #000000;
+  text-decoration: underline;
 }
 
 main {
-  margin-top: 16px
+  margin-top: 32px;
 }

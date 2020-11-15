@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useStream } from "../stream";
+import { FormElement } from "../form-element";
+import { Button } from "../button";
 
 export const AddStream = () => {
   const stream = useStream();
@@ -16,8 +18,7 @@ export const AddStream = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Name:
+      <FormElement label="Name:">
         <input
           type="text"
           required
@@ -26,8 +27,10 @@ export const AddStream = () => {
             setName(e.currentTarget.value)
           }
         />
-      </label>
-      <button type="submit">Add Stream</button>
+      </FormElement>
+      <FormElement>
+        <Button type="submit">Add Stream</Button>
+      </FormElement>
     </form>
   );
 };
