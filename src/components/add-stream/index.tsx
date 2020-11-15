@@ -18,6 +18,7 @@ export const AddStream = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h3>Add Stream</h3>
       <FormElement label="Name:">
         <input
           type="text"

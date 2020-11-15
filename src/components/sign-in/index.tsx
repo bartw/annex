@@ -19,6 +19,7 @@ export const SignIn = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h3>Sign In</h3>
       <FormElement label="Email:">
         <input
           type="email"

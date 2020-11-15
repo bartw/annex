@@ -33,7 +33,7 @@ export const Anonymous = () => (
           <SignIn />
         </Route>
         <Route path="/" exact>
-          Home
+          <h3>Home</h3>
         </Route>
         <Route>
           <Redirect to="/" />

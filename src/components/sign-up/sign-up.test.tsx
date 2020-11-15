@@ -43,7 +43,10 @@ describe("with auth", () => {
     authMock.fireCallbacks(false);
   });
 
-  test("renders email, password inputs and submit button", () => {
+  test("renders title, email, password inputs and submit button", () => {
+    expect(
+      screen.getByRole("heading", { level: 3 }).textContent
+    ).toMatchInlineSnapshot(`"Sign Up"`);
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
     expect(

@@ -18,7 +18,7 @@ export const Authenticated = ({
       <ul>
         <li>
           <NavLink to="/" exact>
-            Home
+            Dashboard
           </NavLink>
         </li>
         <li>

@@ -64,7 +64,7 @@ describe("with stream", () => {
 
   test("shows a title", () => {
     expect(
-      screen.getByRole("heading", { level: 2 }).textContent
+      screen.getByRole("heading", { level: 3 }).textContent
     ).toMatchInlineSnapshot(`"Dashboard"`);
   });
 

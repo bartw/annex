@@ -41,7 +41,10 @@ describe("with stream", () => {
     render(<AddStream />, { stream: streamMock });
   });
 
-  test("renders name and submit button", () => {
+  test("renders title, name and submit button", () => {
+    expect(
+      screen.getByRole("heading", { level: 3 }).textContent
+    ).toMatchInlineSnapshot(`"Add Stream"`);
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /add stream/i })

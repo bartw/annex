@@ -32,3 +32,8 @@ nav a.active {
 main {
   margin-top: 32px;
 }
+
+main h3 {
+  margin-top: 16px;
+  font-weight: 600;
+}
