@@ -4,8 +4,14 @@ import { FirebaseStream } from "../../services/FirebaseStream";
 import { StreamContext } from "../stream";
 import { AddStream } from "../add-stream";
 
-export const Authenticated = ({ onSignOut }: { onSignOut: () => void }) => (
-  <StreamContext.Provider value={new FirebaseStream()}>
+export const Authenticated = ({
+  userId,
+  onSignOut,
+}: {
+  userId: string;
+  onSignOut: () => void;
+}) => (
+  <StreamContext.Provider value={new FirebaseStream(userId)}>
     <div>
       <nav>
         <ul>

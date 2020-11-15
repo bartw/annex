@@ -75,6 +75,8 @@ describe("with auth", () => {
   });
 
   test("shows the correct menu items when authenticated", async () => {
+    authMock.getUserId.mockReturnValue("userId");
+
     act(() => authMock.fireCallbacks(true));
 
     const menuItems = screen
@@ -89,6 +91,8 @@ describe("with auth", () => {
   });
 
   test("shows a sign out button when authenticated", async () => {
+    authMock.getUserId.mockReturnValue("userId");
+
     act(() => authMock.fireCallbacks(true));
 
     expect(
@@ -97,6 +101,8 @@ describe("with auth", () => {
   });
 
   test("on click sign out button calls signOut", async () => {
+    authMock.getUserId.mockReturnValue("userId");
+    
     act(() => authMock.fireCallbacks(true));
 
     userEvent.click(screen.getByRole("button", { name: /sign out/i }));

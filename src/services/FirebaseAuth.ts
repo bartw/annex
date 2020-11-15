@@ -4,14 +4,10 @@ import { Auth, Credentials } from "./Auth";
 
 export class FirebaseAuth implements Auth {
   private auth: app.auth.Auth;
-  private authenticated: boolean = false;
+  private user: app.User | null = null;
 
   constructor() {
     this.auth = app.auth();
-
-    this.onAuthStateChanged((authenticated) => {
-      this.authenticated = authenticated;
-    });
   }
 
   signUp = ({ email, password }: Credentials): Promise<void> =>
@@ -36,10 +32,15 @@ export class FirebaseAuth implements Auth {
   onAuthStateChanged = (
     callback: (authenticated: boolean) => void
   ): (() => void) => {
-    return this.auth.onAuthStateChanged((user) => {
+    return this.auth.onAuthStateChanged((user: app.User | null) => {
+      this.user = user;
       callback(!!user);
     });
   };
 
-  isAuthenticated = (): boolean => this.authenticated;
+  isUserAuthenticated = (): boolean => !!this.user;
+  
+  getUserId = (): string | null => this.user?.uid ?? null;
+  
+  getUserName = (): string | null => this.user?.displayName ?? null;
 }

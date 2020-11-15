@@ -7,5 +7,7 @@ export interface Auth {
   resetPassword({ email }: { email: string }): Promise<void>;
   updatePassword({ password }: { password: string }): Promise<void>;
   onAuthStateChanged(callback: (authenticated: boolean) => void): () => void;
-  isAuthenticated(): boolean;
+  isUserAuthenticated(): boolean;
+  getUserId(): string | null;
+  getUserName(): string | null;
 }

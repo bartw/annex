@@ -17,7 +17,9 @@ export class MockAuth implements Auth {
   signOut = jest.fn().mockReturnValue(Promise.resolve());
   resetPassword = jest.fn().mockReturnValue(Promise.resolve());
   updatePassword = jest.fn().mockReturnValue(Promise.resolve());
-  isAuthenticated = jest.fn().mockReturnValue(false);
+  isUserAuthenticated = jest.fn().mockReturnValue(false);
+  getUserId = jest.fn().mockReturnValue(null);
+  getUserName = jest.fn().mockReturnValue(null);
 
   onAuthStateChanged(callback: Callback): () => void {
     const id = uuid();

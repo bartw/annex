@@ -7,7 +7,7 @@ import { Authenticated } from "./authenticated";
 export const App = () => {
   const auth = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!auth) {
@@ -16,7 +16,7 @@ export const App = () => {
 
     return auth.onAuthStateChanged((authenticated) => {
       setLoading(false);
-      setIsAuthenticated(authenticated);
+      setUserId(authenticated ? auth.getUserId() : null);
     });
   }, [auth]);
 
@@ -30,8 +30,10 @@ export const App = () => {
         {(!auth || loading) && <span>Loading...</span>}
         {auth && !loading && (
           <>
-            {!isAuthenticated && <Anonymous />}
-            {isAuthenticated && <Authenticated onSignOut={auth.signOut} />}
+            {!userId && <Anonymous />}
+            {!!userId && (
+              <Authenticated userId={userId} onSignOut={auth.signOut} />
+            )}
           </>
         )}
       </main>
